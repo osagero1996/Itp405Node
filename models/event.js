@@ -14,7 +14,7 @@ module.exports = sequelize.define('event', {
         validate: {
             notEmpty: {
                 args: true,
-                msg: 'Name is required'
+                msg: 'Title is required'
             }
         }
     },

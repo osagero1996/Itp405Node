@@ -46,7 +46,7 @@ app.get('/api/events/:id', function(request, response){
         if(event){
             response.status(200).json(event);
         }else{
-            response.status(404).send();
+            response.status(404).json({});
         }
     });
 });
@@ -65,9 +65,16 @@ app.post('/api/events', function(request, response){
         org_id: request.body.org_id
 
     }).then((event) => {
-        response.json(event);
-    }, (errors) => {
-        response.json(errors);
+        response.status(200).json(event);
+    }, (validation) => {
+        response.status(422).json({
+            errors: validation.errors.map((errors) => {
+                return{
+                    attribute: errors.path,
+                    message: errors.message
+                };
+            })
+        });
     });
 });
 
@@ -109,11 +116,14 @@ app.patch('/api/events/:id', function(request, response){
 app.delete('/api/events/:id', function(request,response){
     let { id } = request.params;
 
-    Event.findByPk(id).then((event) => {
-        if (event) {
+    Event
+        .findByPk(id)
+        .then((event) => {
+            if (event) {
+            // response.status(204).send();
             return event.destroy();
         } else {
-            Promise.reject()
+            return Promise.reject();
         }
     })
     .then(() => {
@@ -121,6 +131,7 @@ app.delete('/api/events/:id', function(request,response){
     }, () => {
         response.status(404).send();
     });
+    
 });
 
 
