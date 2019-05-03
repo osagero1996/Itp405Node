@@ -104,25 +104,6 @@ module.exports = sequelize.define('event', {
             }
         }
     },
-
-    // event_type_id: {
-    //     field: 'EventTypeId',
-    //     type: Sequelize.INTEGER,
-    //     validate: {
-    //         isNumeric: {
-    //             args: true,
-    //             msg: 'Must be a number'
-                
-    //         },
-    //         notEmpty: {
-    //             args:true,
-    //             msg: 'Event Type is required'
-    //         }
-
-    //     }
-
-    // },
-
     org_id: {
         field: 'OrganizationId',
         type: Sequelize.INTEGER,
@@ -141,23 +122,7 @@ module.exports = sequelize.define('event', {
 
     },
 
-    // user_id: {
-    //     field: 'UserId',
-    //     type: Sequelize.INTEGER,
-    //     validate: {
-    //         isNumeric: {
-    //             args: true,
-    //             msg: 'Must be a number'
-                
-    //         },
-    //         notEmpty: {
-    //             args:true,
-    //             msg: 'User is required'
-    //         }
-
-    //     }
-
-    // },
+    
 }, {
     timestamps: false,
 });
